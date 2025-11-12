@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Pedido{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Crear Nuevo Pedido</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'agregar_pedido' %}">
+    {% csrf_token %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cliente_id" class="form-label">Cliente</label>
+                    <select class="form-select" id="cliente_id" name="cliente_id" required>
+                        <option value="">Seleccione un Cliente</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.pk }}">{{ cliente.nombre_completo }} ({{ cliente.email }})</option>
+                        {% empty %}
+                            <option value="" disabled>No hay clientes disponibles.</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="direccion_envio_id" class="form-label">Dirección de Envío</label>
+                    <select class="form-select" id="direccion_envio_id" name="direccion_envio_id" required>
+                        <option value="">Seleccione una Dirección</option>
+                        {% for direccion in direcciones %}
+                            <option value="{{ direccion.pk }}">
+                                [{{ direccion.cliente.nombre_completo }}] {{ direccion.calle }}, {{ direccion.ciudad }}
+                            </option>
+                        {% empty %}
+                            <option value="" disabled>No hay direcciones disponibles.</option>
+                        {% endfor %}
+                    </select>
+                    <small class="text-muted">Asegúrese de que la dirección pertenezca al cliente seleccionado.</small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="costo_total" class="form-label">Costo Total del Pedido ($)</label>
+                    <input type="number" step="0.01" class="form-control" id="costo_total" name="costo_total" required>
+                    <small class="text-muted">Este costo generalmente se calcula a partir de los DetallePedidos.</small>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="estado_pedido" class="form-label">Estado del Pedido</label>
+                    <select class="form-select" id="estado_pedido" name="estado_pedido" required>
+                        <option value="">Seleccione un Estado</option>
+                        {% for estado in estados %}
+                            <option value="{{ estado }}">{{ estado }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Crear Pedido</button>
+            <a href="{% url 'ver_pedido' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Producto{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar el producto **{{ producto.nombre }}** (ID: {{ producto.id_producto }}). Esta acción es irreversible.</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles del Producto:</strong></p>
+        <ul>
+            <li>**Nombre:** {{ producto.nombre }}</li>
+            <li>**Marca:** {{ producto.marca }}</li>
+            <li>**Categoría:** {{ producto.categoria }}</li>
+            <li>**Precio:** ${{ producto.precio_unitario }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_producto' pk=producto.id_producto %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_producto' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

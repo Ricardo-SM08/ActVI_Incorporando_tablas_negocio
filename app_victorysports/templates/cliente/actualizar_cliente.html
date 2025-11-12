@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Actualizar Cliente{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-warning">Actualizar Cliente: {{ cliente.nombre_completo }}</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'realizar_actualizacion_cliente' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id_cliente" value="{{ cliente.pk }}">
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nombre_completo" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" value="{{ cliente.nombre_completo }}" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email (Único)</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ cliente.email }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="text" class="form-control" id="password" name="password" value="{{ cliente.password }}" required>
+                    <small class="text-muted">La contraseña se sobrescribirá al guardar.</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="rol_id" class="form-label">Rol de Usuario (Opcional)</label>
+                <select class="form-select" id="rol_id" name="rol_id">
+                    <option value="">Seleccione un Rol</option>
+                    {% for rol in roles %}
+                        <option value="{{ rol.pk }}" {% if cliente.rol and cliente.rol.pk == rol.pk %}selected{% endif %}>
+                            {{ rol.nombre_rol }}
+                        </option>
+                    {% empty %}
+                        <option value="" disabled>No hay roles disponibles.</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fecha de Registro</label>
+                <p class="form-control-static">{{ cliente.fecha_registro|date:"d/m/Y H:i" }}</p>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-warning">Actualizar Cliente</button>
+            <a href="{% url 'ver_cliente' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

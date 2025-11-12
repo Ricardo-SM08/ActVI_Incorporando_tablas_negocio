@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio_victorysports' %}">Sistema de Administración Victorysports</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio_victorysports' %}">Inicio</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="proveedorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Proveedor
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="proveedorDropdown">
+                        <li><a class="dropdown-item" href="{% url 'agregar_proveedor' %}">Agregar Proveedor</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_proveedor' %}">Ver Proveedores</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Productos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                        <li><a class="dropdown-item" href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_producto' %}">Ver Producto</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_conexion' %}">Producto Proveedor (Conexiones)</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="{% url 'ver_categoria' %}">Gestionar Categorías</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="clientesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Clientes y Roles
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="clientesDropdown">
+                        <li><a class="dropdown-item" href="{% url 'ver_cliente' %}">Ver Clientes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_direccion' %}">Ver Direcciones</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="{% url 'ver_rol' %}">Gestionar Roles</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pedidosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pedidos y Envíos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="pedidosDropdown">
+                        <li><a class="dropdown-item" href="{% url 'ver_pedido' %}">Ver Pedidos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_envio' %}">Ver Envíos</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a class="dropdown-item" href="{% url 'ver_detallepedido' %}">Ver Detalles de Pedido</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

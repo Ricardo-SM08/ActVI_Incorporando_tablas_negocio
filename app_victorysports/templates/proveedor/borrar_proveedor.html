@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Proveedor{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar al proveedor **{{ proveedor.nombre_empresa }}** (ID: {{ proveedor.id_proveedor }}). Esta acción es irreversible.</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles del Proveedor:</strong></p>
+        <ul>
+            <li>**Empresa:** {{ proveedor.nombre_empresa }}</li>
+            <li>**Contacto:** {{ proveedor.contacto_principal }}</li>
+            <li>**Teléfono:** {{ proveedor.telefono_empresa }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_proveedor' pk=proveedor.id_proveedor %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_proveedor' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

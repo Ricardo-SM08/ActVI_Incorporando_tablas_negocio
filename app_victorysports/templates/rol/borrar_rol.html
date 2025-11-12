@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Rol{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar el rol **{{ rol.nombre_rol }}** (ID: {{ rol.pk }}). Esta acción es irreversible.</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles del Rol:</strong></p>
+        <ul>
+            <li>**Nombre:** {{ rol.nombre_rol }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_rol' pk=rol.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_rol' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

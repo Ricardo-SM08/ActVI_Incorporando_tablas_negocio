@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Pedido{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar el Pedido **#{{ pedido.pk }}** del cliente **{{ pedido.cliente.nombre_completo }}**.</p>
+    <p class="mt-3">**IMPORTANTE:** Esta acción:
+        <ul>
+            <li>Eliminará todos los **Detalles de Pedido** asociados (los artículos comprados).</li>
+            <li>Eliminará el **Envío** asociado, si existe (debido a la relación OneToOneField).</li>
+        </ul>
+    </p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles del Pedido:</strong></p>
+        <ul>
+            <li>**ID:** {{ pedido.pk }}</li>
+            <li>**Cliente:** {{ pedido.cliente.nombre_completo }}</li>
+            <li>**Costo Total:** ${{ pedido.costo_total }}</li>
+            <li>**Estado Actual:** {{ pedido.estado_pedido }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_pedido' pk=pedido.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_pedido' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

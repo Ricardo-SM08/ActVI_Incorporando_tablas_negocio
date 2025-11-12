@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Actualizar Rol{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-warning">Actualizar Rol: {{ rol.nombre_rol }}</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'realizar_actualizacion_rol' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id_rol" value="{{ rol.pk }}">
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nombre_rol" class="form-label">Nombre del Rol</label>
+                <input type="text" class="form-control" id="nombre_rol" name="nombre_rol" value="{{ rol.nombre_rol }}" required>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-warning">Actualizar Rol</button>
+            <a href="{% url 'ver_rol' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

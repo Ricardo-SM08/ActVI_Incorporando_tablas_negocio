@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Dirección{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar la dirección: **{{ direccion.calle }}, {{ direccion.ciudad }}**.</p>
+    <p class="mt-3">**IMPORTANTE:** Si esta dirección está siendo utilizada en algún **Pedido**, la eliminación podría fallar debido a la restricción de clave foránea (`on_delete=PROTECT`).</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles de la Dirección:</strong></p>
+        <ul>
+            <li>**ID:** {{ direccion.pk }}</li>
+            <li>**Cliente:** {{ direccion.cliente.nombre_completo }}</li>
+            <li>**Dirección Completa:** {{ direccion.calle }}, C.P. {{ direccion.codigo_postal }}, {{ direccion.ciudad }}, {{ direccion.pais }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_direccion' pk=direccion.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_direccion' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

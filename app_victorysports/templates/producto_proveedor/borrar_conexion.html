@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Conexión{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar la conexión entre **{{ conexion.producto.nombre }}** y **{{ conexion.proveedor.nombre_empresa }}** (ID: {{ conexion.pk }}). Esta acción es irreversible y afectará la relación de inventario/compra.</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles de la Conexión:</strong></p>
+        <ul>
+            <li>**Producto:** {{ conexion.producto.nombre }} ({{ conexion.producto.marca }})</li>
+            <li>**Proveedor:** {{ conexion.proveedor.nombre_empresa }}</li>
+            <li>**Precio de Compra:** ${{ conexion.precio_compra }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_conexion' pk=conexion.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_conexion' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

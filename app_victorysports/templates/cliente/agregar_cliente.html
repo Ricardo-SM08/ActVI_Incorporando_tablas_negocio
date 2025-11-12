@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Cliente{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Registrar Nuevo Cliente</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'agregar_cliente' %}">
+    {% csrf_token %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nombre_completo" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email (Único)</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <small class="text-muted">Nota: La contraseña se guarda sin cifrar en este ejemplo simple.</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="rol_id" class="form-label">Rol de Usuario (Opcional)</label>
+                <select class="form-select" id="rol_id" name="rol_id">
+                    <option value="">Seleccione un Rol</option>
+                    {% for rol in roles %}
+                        <option value="{{ rol.pk }}">{{ rol.nombre_rol }}</option>
+                    {% empty %}
+                        <option value="" disabled>No hay roles disponibles.</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Guardar Cliente</button>
+            <a href="{% url 'ver_cliente' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

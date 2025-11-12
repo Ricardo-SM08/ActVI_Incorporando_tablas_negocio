@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Rol{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Agregar Nuevo Rol de Usuario</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'agregar_rol' %}">
+    {% csrf_token %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nombre_rol" class="form-label">Nombre del Rol</label>
+                <input type="text" class="form-control" id="nombre_rol" name="nombre_rol" required>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Guardar Rol</button>
+            <a href="{% url 'ver_rol' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

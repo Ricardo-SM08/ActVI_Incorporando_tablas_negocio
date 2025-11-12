@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Actualizar Conexión{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-warning">Actualizar Conexión: {{ conexion.producto.nombre }} - {{ conexion.proveedor.nombre_empresa }}</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'realizar_actualizacion_conexion' %}">
+    {% csrf_token %}
+    <input type="hidden" name="id_conexion" value="{{ conexion.pk }}">
+    
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">Datos de la Relación</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Producto</label>
+                    <input type="text" class="form-control" value="{{ conexion.producto.nombre }} ({{ conexion.producto.marca }})" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Proveedor</label>
+                    <input type="text" class="form-control" value="{{ conexion.proveedor.nombre_empresa }}" disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="precio_compra" class="form-label">Precio de Compra ($)</label>
+                    <input type="number" step="0.01" class="form-control" id="precio_compra" name="precio_compra" value="{{ conexion.precio_compra }}" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="cantidad_comprada" class="form-label">Cantidad Comprada</label>
+                    <input type="number" class="form-control" id="cantidad_comprada" name="cantidad_comprada" value="{{ conexion.cantidad_comprada }}" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="fecha_ultima_compra" class="form-label">Fecha Última Compra (Opcional)</label>
+                    <input type="date" class="form-control" id="fecha_ultima_compra" name="fecha_ultima_compra" value="{{ conexion.fecha_ultima_compra|date:'Y-m-d'|default:'' }}">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="referencia_pedido" class="form-label">Referencia del Pedido (Opcional)</label>
+                    <input type="text" class="form-control" id="referencia_pedido" name="referencia_pedido" value="{{ conexion.referencia_pedido|default:'' }}">
+                </div>
+                <div class="col-md-6 mb-3 form-check d-flex align-items-center pt-4">
+                    <input class="form-check-input" type="checkbox" id="es_proveedor_activo" name="es_proveedor_activo" {% if conexion.es_proveedor_activo %}checked{% endif %}>
+                    <label class="form-check-label ms-2" for="es_proveedor_activo">
+                        ¿Es Proveedor Activo para este Producto?
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-warning">Actualizar Conexión</button>
+            <a href="{% url 'ver_conexion' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

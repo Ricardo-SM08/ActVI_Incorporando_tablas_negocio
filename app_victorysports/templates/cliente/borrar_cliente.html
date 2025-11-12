@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Borrar Cliente{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">¡Advertencia de Eliminación!</h4>
+    <p>Estás a punto de eliminar al cliente **{{ cliente.nombre_completo }}** (Email: {{ cliente.email }}). Esta acción **eliminará también todas las direcciones asociadas** y afectará a los **pedidos** que haya realizado (los pedidos no se borran, pero su FK a cliente causará un error si el on_delete no lo permite).</p>
+    <hr>
+    <p class="mb-0">¿Estás absolutamente seguro que deseas continuar?</p>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p><strong>Detalles del Cliente:</strong></p>
+        <ul>
+            <li>**Nombre:** {{ cliente.nombre_completo }}</li>
+            <li>**Email:** {{ cliente.email }}</li>
+            <li>**Rol:** {{ cliente.rol.nombre_rol|default:"Sin Rol" }}</li>
+        </ul>
+
+        <form method="POST" action="{% url 'borrar_cliente' pk=cliente.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar Permanentemente</button>
+            <a href="{% url 'ver_cliente' %}" class="btn btn-secondary btn-lg">No, Volver a la Lista</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

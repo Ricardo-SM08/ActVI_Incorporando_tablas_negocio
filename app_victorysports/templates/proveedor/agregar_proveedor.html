@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Proveedor{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-primary">Agregar Nuevo Proveedor</h2>
+
+{% if error_message %}
+    <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+{% endif %}
+
+<form method="POST" action="{% url 'agregar_proveedor' %}">
+    {% csrf_token %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nombre_empresa" class="form-label">Nombre de la Empresa</label>
+                <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" required>
+            </div>
+            <div class="mb-3">
+                <label for="contacto_principal" class="form-label">Contacto Principal</label>
+                <input type="text" class="form-control" id="contacto_principal" name="contacto_principal" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono_empresa" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono_empresa" name="telefono_empresa" required>
+            </div>
+            <div class="mb-3">
+                <label for="email_empresa" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email_empresa" name="email_empresa" required>
+            </div>
+            <div class="mb-3">
+                <label for="pais_origen" class="form-label">País de Origen</label>
+                <input type="text" class="form-control" id="pais_origen" name="pais_origen" required>
+            </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <textarea class="form-control" id="direccion" name="direccion" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-success">Guardar Proveedor</button>
+            <a href="{% url 'ver_proveedor' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}
