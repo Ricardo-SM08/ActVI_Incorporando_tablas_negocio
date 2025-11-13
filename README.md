@@ -59,3 +59,14 @@
 ## Actualizar 
 
 <img width="1898" height="951" alt="image" src="https://github.com/user-attachments/assets/4132c905-7fca-494d-a0be-11b13f9ef0ba" />
+
+<img width="1920" height="993" alt="image" src="https://github.com/user-attachments/assets/8d991537-aa9d-4618-a760-38d63f398ea9" />
+
+<img width="1917" height="955" alt="image" src="https://github.com/user-attachments/assets/456a5f8f-3ec1-4eac-aba8-a61fd1e65025" />
+
+<img width="1903" height="989" alt="image" src="https://github.com/user-attachments/assets/8708afda-5fbf-448c-8125-26a79b99fa30" />
+
+<img width="1920" height="946" alt="image" src="https://github.com/user-attachments/assets/9b560d21-5510-4fa5-b9b4-0c74058c378c" />
+
+<img width="1898" height="1000" alt="image" src="https://github.com/user-attachments/assets/c2c8554d-0933-4007-8c2f-9dacedf36d3c" />
+
